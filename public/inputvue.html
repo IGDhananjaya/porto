@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Input Sederhana</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+</head>
+<body class="bg-gray-800 text-gray-500">
+
+<header class="z-10 sticky top-0 bg-gray-950 py-5"> <!-- header -->
+    <nav class="w-9/12 flex flex-row mx-auto">
+        <div class="uppercase text-lg basis-1/4"> <!-- logo -->
+            <a href="index.html#hero">
+                <span class="font-semibold text-blue-400">IGD</span>
+            </a>
+        </div>
+        <div class="basis-1/2 flex items-center justify-evenly"> <!-- Link -->
+            <a href="index.html#Koding"><span>Koding</span></a>
+            <a href="index.html#Pengalaman"><span>Pengalaman</span></a>
+            <a href="index.html#Tugas"><span>Tugas</span></a>
+            <a href="index.html#Kontak"><span>Kontak</span></a>
+        </div>
+        <div class="basis-1/4 flex justify-end"> <!-- dark mode -->
+            <!-- dark mode -->
+            <span class="hidden dark:inline end:0"
+            ><svg viewBox="0 0 24 24" fill="none" class="w-6 h-6">
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M17.715 15.15A6.5 6.5 0 0 1 9 6.035C6.106 6.922 4 9.645 4 12.867c0 3.94 3.153 7.136 7.042 7.136 3.101 0 5.734-2.032 6.673-4.853Z"
+                    class="fill-sky-400/20"
+                ></path>
+                <path
+                    d="m17.715 15.15.95.316a1 1 0 0 0-1.445-1.185l.495.869ZM9 6.035l.846.534a1 1 0 0 0-1.14-1.49L9 6.035Zm8.221 8.246a5.47 5.47 0 0 1-2.72.718v2a7.47 7.47 0 0 0 3.71-.98l-.99-1.738Zm-2.72.718A5.5 5.5 0 0 1 9 9.5H7a7.5 7.5 0 0 0 7.5 7.5v-2ZM9 9.5c0-1.079.31-2.082.845-2.93L8.153 5.5A7.47 7.47 0 0 0 7 9.5h2Zm-4 3.368C5 10.089 6.815 7.75 9.292 6.99L8.706 5.08C5.397 6.094 3 9.201 3 12.867h2Zm6.042 6.136C7.718 19.003 5 16.268 5 12.867H3c0 4.48 3.588 8.136 8.042 8.136v-2Zm5.725-4.17c-.81 2.433-3.074 4.17-5.725 4.17v2c3.552 0 6.553-2.327 7.622-5.537l-1.897-.632Z"
+                    class="fill-sky-500"
+                ></path>
+                <path
+                    fill-rule="evenodd"
+                    clip-rule="evenodd"
+                    d="M17 3a1 1 0 0 1 1 1 2 2 0 0 0 2 2 1 1 0 1 1 0 2 2 2 0 0 0-2 2 1 1 0 1 1-2 0 2 2 0 0 0-2-2 1 1 0 1 1 0-2 2 2 0 0 0 2-2 1 1 0 0 1 1-1Z"
+                    class="fill-sky-500"
+                ></path></svg></span>
+        </div>
+    </nav>
+</header>
+<div class="min-h-screen flex flex-col justify-between">
+    <main> <!-- Main Content -->
+        <div id="app" class="container bg-blue-100 pt-2 pr-4 pb-2 pl-4 mx-6 my-10 rounded-2xl mt-10">
+            <div class="grid grid-cols-2 gap-4 rounded-2x1">
+                <div class="border border-white m-4 p-4 g-4 rounded-2xl"> 
+                    <div class="card mb-4">
+                        <h1 class="text-xl mb-4 text-center uppercase font-bold">Input Barang</h1>
+                        <form v-on:submit.prevent="tambahBarang">
+                            <div class="mb-4">
+                                <label for="namaBarang" class="block font-medium">Nama Barang:</label>
+                                <input type="text" id="namaBarang" v-model="namaBarang" required class="border rounded py-1 px-2 w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label for="jumlahBarang" class="block font-medium">Jumlah Barang:</label>
+                                <input type="text" id="jumlahBarang" v-model="jumlahBarang" required class="border rounded py-1 px-2 w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label for="hargaBarang" class="block font-medium">Harga Barang:</label>
+                                <input type="text" id="hargaBarang" v-model="hargaBarang" required class="border rounded py-1 px-2 w-full">
+                            </div>
+                            <div class="mb-4">
+                                <label for="tipeBarang" class="block font-medium">Tipe Barang:</label>
+                                <select id="tipeBarang" v-model="tipeBarang" required class="border rounded py-1 px-2 w-full">
+                                    <option v-for="option in tipeOptions" :value="option">{{ option }}</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded">Tambah</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="border border-white m-4 p-4 g-4 mt-10">
+                    <h1 class="text-xl font-bold text-center mb-4 uppercase ">Daftar Barang</h1>
+                    <table class="w-full mt-10">
+                        <thead class=" container tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-white">
+                            <tr class="border border-white rounded-md">
+                                <th class="border border-white">Nama Barang</th>
+                                <th class="border border-white">Jumlah</th>
+                                <th class="border border-white">Harga</th>
+                                <th class="border border-white">Tipe</th>
+                                <th class="border border-white">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border  border-white m-4 p-4 g-4" v-for="(barang, index) in daftarBarang" :key="index">
+                                <td class="border border-white">{{ barang.nama }}</td>
+                                <td class="border border-white">{{ barang.jumlah }}</td>
+                                <td class="border border-white">{{ barang.harga }}</td>
+                                <td class="border border-white">{{ barang.tipe }}</td>
+                                <td class="border border-white">{{ barang.total }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        namaBarang: '',
+        jumlahBarang: '',
+        hargaBarang: '',
+        tipeBarang: 'Elektronik',
+        daftarBarang: [],
+        tipeOptions: ['Elektronik', 'Pakaian', 'Makanan', 'Minuman']
+    },
+    methods: {
+        tambahBarang() {
+            const total = parseFloat(this.jumlahBarang) * parseFloat(this.hargaBarang);
+            this.daftarBarang.push({
+                nama: this.namaBarang,
+                jumlah: this.jumlahBarang,
+                harga: this.hargaBarang,
+                tipe: this.tipeBarang,
+                total: total.toFixed(2) // Membulatkan total menjadi 2 desimal
+            });
+            this.resetForm();
+        },
+        resetForm() {
+            this.namaBarang = '';
+            this.jumlahBarang = '';
+            this.hargaBarang = '';
+            this.tipeBarang = 'Elektronik';
+        }
+    }
+});
+</script>
+</html>
